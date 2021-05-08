@@ -1,9 +1,23 @@
 import 'date_handler.dart';
+import 'first_week_day.dart';
 
 class Calendar {
   // Amount of days in months
   // [JAN, FEB, MAR, APR, MAY, JUN, JUL, AUG, SEP, OCT, NOV, DEC]
-  final List<int> _monthLengths = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+  final List<int> _monthLengths = [
+    31,
+    28,
+    31,
+    30,
+    31,
+    30,
+    31,
+    31,
+    30,
+    31,
+    30,
+    31
+  ];
 
   // Check for leap year
   bool _isLeapYear(int year) {
@@ -27,9 +41,8 @@ class Calendar {
   }
 
   // Get calendar by month
-  List<DateHandler> getMonthCalendar(int month, int year,
-      {FirstWeekDay firstWeekDay = FirstWeekDay.monday}
-  ) {
+  List<DateHandler> getMonthCalendar(
+      {int year, int month, FirstWeekDay firstWeekDay = FirstWeekDay.monday}) {
     // Check passing arguments
     if (year == null || month == null || month < 1 || month > 12)
       throw ArgumentError('Invalid year or month');
@@ -113,5 +126,3 @@ class Calendar {
     return calendar;
   }
 }
-
-enum FirstWeekDay { sunday, monday }
