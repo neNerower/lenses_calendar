@@ -1,7 +1,7 @@
 class DateHandler {
   final DateTime date;
 
-  DateHandler(
+  DateHandler({
     this.date,
-  );
+  });
 }
