@@ -1,7 +1,7 @@
 import 'date_handler.dart';
 import 'first_week_day.dart';
 
-class Calendar {
+class CalendarModel {
   // Amount of days in months
   // [JAN, FEB, MAR, APR, MAY, JUN, JUL, AUG, SEP, OCT, NOV, DEC]
   final List<int> _monthLengths = [
