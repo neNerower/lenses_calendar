@@ -113,7 +113,8 @@ class CalendarModel {
 
       leftDays = 7 -
           calendar.last.date.weekday -
-          ((firstWeekDay == FirstWeekDay.sunday) ? 0 : 1);
+          ((firstWeekDay == FirstWeekDay.sunday) ? 1 : 0);
+      if (leftDays == -1) leftDays = 6;
 
       for (int i = 0; i < leftDays; i++) {
         calendar.add(
