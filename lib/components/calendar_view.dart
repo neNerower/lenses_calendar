@@ -12,8 +12,9 @@ class CalendarView extends StatefulWidget {
 }
 
 class _CalendarViewState extends State<CalendarView> {
+  DateTime _currentDate;
   DateTime _focusedDate;
-  List<DateHandler> _monthCalendar = [];
+  List<List<DateHandler>> _calendar = [];
 
   final List<String> _monthNames = [
     'January',
@@ -33,31 +34,86 @@ class _CalendarViewState extends State<CalendarView> {
   @override
   void initState() {
     super.initState();
-    _focusedDate = DateTime.now();
+    DateTime now = DateTime.now();
+    _currentDate = now;
+    _focusedDate = now;
 
     // Todo: Find some info
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      setState(() => _getCalendar());
+      setState(() => _getCalendarForYear(now.year));
     });
   }
 
-  // Get calendar for current month
-  void _getCalendar() {
-    _monthCalendar = CalendarModel().getMonthCalendar(
-      year: _focusedDate.year,
-      month: _focusedDate.month,
-    );
+  // Get calendar for current year
+  void _getCalendarForYear(int year) {
+    for (int month = 1; month <= 12; month++) {
+      _calendar.add(
+        CalendarModel().getMonthCalendar(year: year, month: month),
+      );
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    //return ListView.builder(itemBuilder: (context, index) {});
+    int monthAmount = _monthNames.length;
+    int startYear = _currentDate.year - 1;
+
+    // return ListView.builder(
+    //   itemCount: _calendar.length,
+    //   itemBuilder: (context, index) {
+    //     return Container(
+    //       child: Column(
+    //         children: <Widget>[
+    //           Center(
+    //             child: Text(
+    //               "${_monthNames[index % 12 + 1]}",
+    //               style: TextStyle(
+    //                 fontSize: 22,
+    //                 color: Colors.white,
+    //               ),
+    //             ),
+    //           ),
+    //           CalendarBody(monthCalendar: _calendar[index]),
+    //         ],
+    //       ),
+    //     );
+    //   },
+    // );
+
+    // return ListView.builder(
+    //   // // Add prev next and curr years to list
+    //   // itemCount: 3 * monthAmount,
+    //   reverse: true,
+    //   itemBuilder: (context, index) {
+    //     for (int i = 1; i <= monthAmount; i++) {
+    //       _getCalendar(year: startYear + index, month: i);
+    //       return Expanded(
+    //         child: Column(
+    //           children: <Widget>[
+    //             Center(
+    //               child: Text(
+    //                 "${_monthNames[i]}, ${startYear + index}",
+    //                 style: TextStyle(
+    //                   fontSize: 22,
+    //                   color: Colors.white,
+    //                 ),
+    //               ),
+    //             ),
+    //             Flexible(
+    //               child: CalendarBody(monthCalendar: _calendar[index]),
+    //             ),
+    //           ],
+    //         ),
+    //       );
+    //     }
+    //   },
+    // );
 
     return Column(
       children: <Widget>[
         Center(
           child: Text(
-            _monthNames[_focusedDate.month],
+            _monthNames[_currentDate.month],
             style: TextStyle(
               fontSize: 22,
               color: Colors.white,
@@ -65,7 +121,7 @@ class _CalendarViewState extends State<CalendarView> {
           ),
         ),
         Flexible(
-          child: CalendarBody(monthCalendar: _monthCalendar),
+          child: CalendarBody(monthCalendar: _calendar[4]),
         ),
         // Flexible(
         //   child: CalendarBody(monthCalendar: _monthCalendar),
