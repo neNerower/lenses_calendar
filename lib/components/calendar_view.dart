@@ -56,77 +56,39 @@ class _CalendarViewState extends State<CalendarView> {
   @override
   Widget build(BuildContext context) {
     int monthAmount = _monthNames.length;
-    int startYear = _currentDate.year - 1;
+    int startYear = _currentDate.year + 1;
 
-    // return ListView.builder(
-    //   itemCount: _calendar.length,
-    //   itemBuilder: (context, index) {
-    //     return Container(
-    //       child: Column(
-    //         children: <Widget>[
-    //           Center(
-    //             child: Text(
-    //               "${_monthNames[index % 12 + 1]}",
-    //               style: TextStyle(
-    //                 fontSize: 22,
-    //                 color: Colors.white,
-    //               ),
-    //             ),
-    //           ),
-    //           CalendarBody(monthCalendar: _calendar[index]),
-    //         ],
-    //       ),
-    //     );
-    //   },
-    // );
+    return Expanded(
+      child: ListView.builder(
+        reverse: true,
+        itemBuilder: (context, index) {
+          int year = startYear - index ~/ monthAmount;
+          int month = monthAmount - index % monthAmount - 1;
 
-    // return ListView.builder(
-    //   // // Add prev next and curr years to list
-    //   // itemCount: 3 * monthAmount,
-    //   reverse: true,
-    //   itemBuilder: (context, index) {
-    //     for (int i = 1; i <= monthAmount; i++) {
-    //       _getCalendar(year: startYear + index, month: i);
-    //       return Expanded(
-    //         child: Column(
-    //           children: <Widget>[
-    //             Center(
-    //               child: Text(
-    //                 "${_monthNames[i]}, ${startYear + index}",
-    //                 style: TextStyle(
-    //                   fontSize: 22,
-    //                   color: Colors.white,
-    //                 ),
-    //               ),
-    //             ),
-    //             Flexible(
-    //               child: CalendarBody(monthCalendar: _calendar[index]),
-    //             ),
-    //           ],
-    //         ),
-    //       );
-    //     }
-    //   },
-    // );
-
-    return Column(
-      children: <Widget>[
-        Center(
-          child: Text(
-            _monthNames[_currentDate.month],
-            style: TextStyle(
-              fontSize: 22,
-              color: Colors.white,
+          return Container(
+            height: MediaQuery.of(context).size.height * 0.6,
+            child: Column(
+              children: <Widget>[
+                SizedBox(height: 15),
+                Center(
+                  child: Text(
+                    "${_monthNames[month]}, $year",
+                    style: TextStyle(
+                      fontSize: 22,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+                SizedBox(height: 15),
+                Flexible(
+                  child: CalendarBody(monthCalendar: _calendar[month]),
+                ),
+                Divider(color: Colors.grey[400]),
+              ],
             ),
-          ),
-        ),
-        Flexible(
-          child: CalendarBody(monthCalendar: _calendar[4]),
-        ),
-        // Flexible(
-        //   child: CalendarBody(monthCalendar: _monthCalendar),
-        // ),
-      ],
+          );
+        },
+      ),
     );
   }
 }

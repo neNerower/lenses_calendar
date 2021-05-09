@@ -21,7 +21,7 @@ class _MainScreenState extends State<MainScreen> {
         backgroundColor: Colors.grey[850],
       ),
       body: Container(
-        padding: EdgeInsets.all(15),
+        padding: EdgeInsets.only(left: 15, right: 15, bottom: 15),
         height: MediaQuery.of(context).size.height,
         decoration: BoxDecoration(
           color: Colors.black87,
