@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
 
 class WeekDayTitle extends StatelessWidget {
-  final int weekDayIndex;
-
-  const WeekDayTitle({
-    Key key,
-    this.weekDayIndex,
-  }) : super(key: key);
+  const WeekDayTitle({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,11 +15,22 @@ class WeekDayTitle extends StatelessWidget {
       'SUN',
     ];
 
-    return Text(
-      weekDays[weekDayIndex],
-      style: TextStyle(
-        color: Colors.yellow,
-        fontSize: 12,
+    List<Widget> titles = [];
+
+    for (int i = 0; i < weekDays.length; i++) {
+      titles.add(Text(weekDays[i],
+          style: TextStyle(
+            color: Colors.yellow,
+            fontSize: 12,
+          )));
+    }
+
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 15),
+      padding: EdgeInsets.symmetric(horizontal: 15),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: titles,
       ),
     );
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lenses_calendar/components/calendar_view.dart';
+import 'package:lenses_calendar/components/week_day_title.dart';
 
 class MainScreen extends StatefulWidget {
   MainScreen({Key key}) : super(key: key);
@@ -9,22 +10,23 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Container(
-          margin: EdgeInsets.all(15),
-          padding: EdgeInsets.all(15),
-          height: MediaQuery.of(context).size.height * 0.6,
-          decoration: BoxDecoration(
-            color: Colors.black,
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: CalendarView(),
+      appBar: AppBar(
+        bottom: PreferredSize(
+          child: WeekDayTitle(),
+          preferredSize: Size.fromHeight(4),
         ),
+        backgroundColor: Colors.grey[850],
+      ),
+      body: Container(
+        padding: EdgeInsets.all(15),
+        height: MediaQuery.of(context).size.height,
+        decoration: BoxDecoration(
+          color: Colors.black87,
+        ),
+        child: CalendarView(),
       ),
     );
   }
