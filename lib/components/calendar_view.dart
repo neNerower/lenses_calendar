@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lenses_calendar/constants.dart';
 import 'package:lenses_calendar/model/calendar_model.dart';
 import 'package:lenses_calendar/model/date_handler.dart';
 
@@ -13,8 +14,8 @@ class CalendarView extends StatefulWidget {
 
 class _CalendarViewState extends State<CalendarView> {
   DateTime _currentDate;
-  DateTime _focusedDate;
   List<List<DateHandler>> _calendar = [];
+  ScrollController _controller;
 
   final List<String> _monthNames = [
     'January',
@@ -36,7 +37,9 @@ class _CalendarViewState extends State<CalendarView> {
     super.initState();
     DateTime now = DateTime.now();
     _currentDate = now;
-    _focusedDate = now;
+
+    _controller = ScrollController(initialScrollOffset: kBlockHeight * (_monthNames.length*2 - now.month));
+    // _controller.addListener();
 
     // Todo: Find some info
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
@@ -55,20 +58,23 @@ class _CalendarViewState extends State<CalendarView> {
 
   @override
   Widget build(BuildContext context) {
+    //double blockHeight = MediaQuery.of(context).size.height * 0.6;
     int monthAmount = _monthNames.length;
     int startYear = _currentDate.year + 1;
 
     return Expanded(
       child: ListView.builder(
+        controller: _controller,
         reverse: true,
         itemBuilder: (context, index) {
           int year = startYear - index ~/ monthAmount;
           int month = monthAmount - index % monthAmount - 1;
 
           return Container(
-            height: MediaQuery.of(context).size.height * 0.6,
+            height: kBlockHeight,
             child: Column(
               children: <Widget>[
+                Divider(color: Colors.grey[400]),
                 SizedBox(height: 15),
                 Center(
                   child: Text(
@@ -83,7 +89,6 @@ class _CalendarViewState extends State<CalendarView> {
                 Flexible(
                   child: CalendarBody(monthCalendar: _calendar[month]),
                 ),
-                Divider(color: Colors.grey[400]),
               ],
             ),
           );
