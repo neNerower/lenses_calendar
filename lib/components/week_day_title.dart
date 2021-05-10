@@ -18,15 +18,17 @@ class WeekDayTitle extends StatelessWidget {
     List<Widget> titles = [];
 
     for (int i = 0; i < weekDays.length; i++) {
-      titles.add(Text(weekDays[i],
-          style: TextStyle(
-            color: Colors.yellow,
-            fontSize: 12,
-          )));
+      titles.add(Text(
+        weekDays[i],
+        style: TextStyle(
+          color: Colors.yellow,
+          fontSize: 12,
+        ),
+      ));
     }
 
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 15),
+      margin: EdgeInsets.symmetric(horizontal: 10),
       padding: EdgeInsets.symmetric(horizontal: 15),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
