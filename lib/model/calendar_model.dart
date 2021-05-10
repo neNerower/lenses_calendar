@@ -90,6 +90,7 @@ class CalendarModel {
           0,
           DateHandler(
             date: DateTime(otherYear, otherMonth, i),
+            isOtherMonth: true,
           ),
         );
       }
@@ -120,6 +121,7 @@ class CalendarModel {
         calendar.add(
           DateHandler(
             date: DateTime(otherYear, otherMonth, i + 1),
+            isOtherMonth: true,
           ),
         );
       }

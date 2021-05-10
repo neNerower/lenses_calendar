@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lenses_calendar/model/date_handler.dart';
 
-
 class CalendarBody extends StatelessWidget {
   final List<DateHandler> monthCalendar;
 
@@ -21,12 +20,15 @@ class CalendarBody extends StatelessWidget {
         crossAxisSpacing: 1,
       ),
       itemBuilder: (context, index) {
-        //if (_monthCalendar[index - 7].date = _selectedDate)
-        //  return Selector(_monthCalendar[index - 7]);
         return Center(
           child: InkWell(
-            child: Text('${monthCalendar[index].date.day}',
-                style: TextStyle(color: Colors.white)),
+            child: Text(
+              '${monthCalendar[index].date.day}',
+              style: TextStyle(
+                  color: (monthCalendar[index].isOtherMonth)
+                      ? Colors.white.withOpacity(0)
+                      : Colors.white),
+            ),
           ),
         );
       },
