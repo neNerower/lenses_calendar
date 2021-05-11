@@ -1,25 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:lenses_calendar/constants/constants.dart';
 
 class WeekDayTitle extends StatelessWidget {
   const WeekDayTitle({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final List<String> weekDays = [
-      'MON',
-      'TUE',
-      'WED',
-      'THU',
-      'FRI',
-      'SAT',
-      'SUN',
-    ];
-
     List<Widget> titles = [];
 
-    for (int i = 0; i < weekDays.length; i++) {
+    for (int i = 0; i < kWeekDays.length; i++) {
       titles.add(Text(
-        weekDays[i],
+        kWeekDays[i],
         style: TextStyle(
           color: Colors.yellow,
           fontSize: 12,
