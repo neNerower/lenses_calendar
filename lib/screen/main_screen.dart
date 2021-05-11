@@ -14,9 +14,21 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(
+              Icons.calendar_today,
+              size: 22,
+            ),
+            tooltip: "Go to current date",
+            // splashColor: Colors.transparent,
+            splashRadius: 10,
+            onPressed: () {},
+          ),
+        ],
         bottom: PreferredSize(
           child: WeekDayTitle(),
-          preferredSize: Size.fromHeight(4),
+          preferredSize: Size.fromHeight(10),
         ),
         backgroundColor: Colors.grey[850],
       ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lenses_calendar/constants.dart';
+import 'package:lenses_calendar/constants/constants.dart';
 import 'package:lenses_calendar/model/calendar_model.dart';
 import 'package:lenses_calendar/model/date_handler.dart';
 
@@ -38,7 +38,8 @@ class _CalendarViewState extends State<CalendarView> {
     DateTime now = DateTime.now();
     _currentDate = now;
 
-    _controller = ScrollController(initialScrollOffset: kBlockHeight * (_monthNames.length*2 - now.month));
+    _controller = ScrollController(
+        initialScrollOffset: kBlockHeight * (kMonthAmount * 2 - now.month));
     // _controller.addListener();
 
     // Todo: Find some info
@@ -56,44 +57,45 @@ class _CalendarViewState extends State<CalendarView> {
     }
   }
 
+  void goToCurrentMonth() {
+    _controller.jumpTo(kBlockHeight * (kMonthAmount * 2 - _currentDate.month));
+  }
+
   @override
   Widget build(BuildContext context) {
-    //double blockHeight = MediaQuery.of(context).size.height * 0.6;
-    int monthAmount = _monthNames.length;
     int startYear = _currentDate.year + 1;
 
-    return Expanded(
-      child: ListView.builder(
-        controller: _controller,
-        reverse: true,
-        itemBuilder: (context, index) {
-          int year = startYear - index ~/ monthAmount;
-          int month = monthAmount - index % monthAmount - 1;
+    return ListView.builder(
+      controller: _controller,
+      reverse: true,
+      itemBuilder: (context, index) {
+        int year = startYear - index ~/ kMonthAmount;
+        int month = kMonthAmount - index % kMonthAmount - 1;
 
-          return Container(
-            height: kBlockHeight,
-            child: Column(
-              children: <Widget>[
-                Divider(color: Colors.grey[400]),
-                SizedBox(height: 15),
-                Center(
-                  child: Text(
-                    "${_monthNames[month]}, $year",
-                    style: TextStyle(
-                      fontSize: 22,
-                      color: Colors.white,
-                    ),
+        return Container(
+          height: kBlockHeight,
+          child: Column(
+            children: <Widget>[
+              Divider(color: Colors.grey[400]),
+              SizedBox(height: 15),
+              Center(
+                child: Text(
+                  "${_monthNames[month]}, $year",
+                  style: TextStyle(
+                    fontSize: 22,
+                    color: Colors.white,
                   ),
                 ),
-                SizedBox(height: 15),
-                Flexible(
-                  child: CalendarBody(monthCalendar: _calendar[month]),
-                ),
-              ],
-            ),
-          );
-        },
-      ),
+              ),
+              SizedBox(height: 15),
+              Flexible(
+                // TODO: Fix one-year bug
+                child: CalendarBody(monthCalendar: _calendar[month]),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }
