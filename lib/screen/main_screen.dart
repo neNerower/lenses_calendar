@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lenses_calendar/components/calendar_view.dart';
 import 'package:lenses_calendar/components/week_day_title.dart';
+import 'package:lenses_calendar/constants/constants.dart';
 
 class MainScreen extends StatefulWidget {
   MainScreen({Key key}) : super(key: key);
@@ -10,6 +11,25 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+  DateTime _currentDate;
+  ScrollController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    DateTime now = DateTime.now();
+    _currentDate = now;
+
+    _controller = ScrollController(
+      initialScrollOffset: kBlockHeight * (kMonthAmount * 2 - now.month),
+    );
+    // _controller.addListener();
+  }
+
+  void _goToCurrentMonth() {
+    _controller.jumpTo(kBlockHeight * (kMonthAmount * 2 - _currentDate.month));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +43,7 @@ class _MainScreenState extends State<MainScreen> {
             tooltip: "Go to current date",
             // splashColor: Colors.transparent,
             splashRadius: 10,
-            onPressed: () {},
+            onPressed: () => _goToCurrentMonth(),
           ),
         ],
         bottom: PreferredSize(
@@ -38,7 +58,7 @@ class _MainScreenState extends State<MainScreen> {
         decoration: BoxDecoration(
           color: Colors.black87,
         ),
-        child: CalendarView(),
+        child: CalendarView(controller: _controller),
       ),
     );
   }
