@@ -26,7 +26,7 @@ class CalendarBody extends StatelessWidget {
               '${monthCalendar[index].date.day}',
               style: TextStyle(
                   color: (monthCalendar[index].isOtherMonth)
-                      ? Colors.white.withOpacity(0)
+                      ? Colors.transparent
                       : Colors.white),
             ),
           ),
