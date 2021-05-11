@@ -14,7 +14,7 @@ class CalendarView extends StatefulWidget {
 
 class _CalendarViewState extends State<CalendarView> {
   DateTime _currentDate;
-  List<List<DateHandler>> _calendar = [];
+  // List<List<DateHandler>> _calendar = [];
   ScrollController _controller;
 
   final List<String> _monthNames = [
@@ -43,18 +43,25 @@ class _CalendarViewState extends State<CalendarView> {
     // _controller.addListener();
 
     // Todo: Find some info
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      setState(() => _getCalendarForYear(now.year));
-    });
+    // WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+    //   // Get next year calendar
+    //   _getCalendarForYear(now.year + 1);
+    // });
   }
 
-  // Get calendar for current year
-  void _getCalendarForYear(int year) {
-    for (int month = 1; month <= 12; month++) {
-      _calendar.add(
-        CalendarModel().getMonthCalendar(year: year, month: month),
-      );
-    }
+  // // Get calendar for current year
+  // void _getCalendarForYear(int year) {
+  //   setState(() {
+  //     for (int month = 1; month <= 12; month++) {
+  //       _calendar.add(
+  //         _getCalendarForMonth(year, month),
+  //       );
+  //     }
+  //   });
+  // }
+
+  List<DateHandler> _getCalendarForMonth(int year, int month) {
+    return CalendarModel().getMonthCalendar(year: year, month: month);
   }
 
   void goToCurrentMonth() {
@@ -70,7 +77,7 @@ class _CalendarViewState extends State<CalendarView> {
       reverse: true,
       itemBuilder: (context, index) {
         int year = startYear - index ~/ kMonthAmount;
-        int month = kMonthAmount - index % kMonthAmount - 1;
+        int month = kMonthAmount - index % kMonthAmount;
 
         return Container(
           height: kBlockHeight,
@@ -80,7 +87,7 @@ class _CalendarViewState extends State<CalendarView> {
               SizedBox(height: 15),
               Center(
                 child: Text(
-                  "${_monthNames[month]}, $year",
+                  "${_monthNames[month - 1]}, $year",
                   style: TextStyle(
                     fontSize: 22,
                     color: Colors.white,
@@ -89,8 +96,9 @@ class _CalendarViewState extends State<CalendarView> {
               ),
               SizedBox(height: 15),
               Flexible(
-                // TODO: Fix one-year bug
-                child: CalendarBody(monthCalendar: _calendar[month]),
+                child: CalendarBody(
+                  monthCalendar: _getCalendarForMonth(year, month),
+                ),
               ),
             ],
           ),
