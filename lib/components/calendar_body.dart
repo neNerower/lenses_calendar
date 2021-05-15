@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lenses_calendar/model/date_handler.dart';
 
+import 'day/day_cell.dart';
+
 class CalendarBody extends StatelessWidget {
   final List<DateHandler> monthCalendar;
 
@@ -21,14 +23,8 @@ class CalendarBody extends StatelessWidget {
       ),
       itemBuilder: (context, index) {
         return Center(
-          child: InkWell(
-            child: Text(
-              '${monthCalendar[index].date.day}',
-              style: TextStyle(
-                  color: (monthCalendar[index].isOtherMonth)
-                      ? Colors.transparent
-                      : Colors.white),
-            ),
+          child: DayCell(
+            date: monthCalendar[index],
           ),
         );
       },
