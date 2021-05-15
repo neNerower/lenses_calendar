@@ -21,13 +21,13 @@ class _MainScreenState extends State<MainScreen> {
     _currentDate = now;
 
     _controller = ScrollController(
-      initialScrollOffset: kBlockHeight * (kMonthAmount * 2 - now.month),
+      initialScrollOffset: kCalendarBodyHeight * (kMonthAmount * 2 - now.month),
     );
     // _controller.addListener();
   }
 
   void _goToCurrentMonth() {
-    _controller.jumpTo(kBlockHeight * (kMonthAmount * 2 - _currentDate.month));
+    _controller.jumpTo(kCalendarBodyHeight * (kMonthAmount * 2 - _currentDate.month));
   }
 
   @override

@@ -1,4 +1,4 @@
-const double kBlockHeight = 430.0;
+const double kCalendarBodyHeight = 430.0;
 const int kMonthAmount = 12;
 
 const List<String> kMonthNames = [

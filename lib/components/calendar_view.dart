@@ -20,33 +20,31 @@ class CalendarView extends StatelessWidget {
     return ListView.builder(
       controller: controller,
       reverse: true,
+      itemExtent: kCalendarBodyHeight,
       itemBuilder: (context, index) {
         int year = startYear - index ~/ kMonthAmount;
         int month = kMonthAmount - index % kMonthAmount;
 
-        return Container(
-          height: kBlockHeight,
-          child: Column(
-            children: <Widget>[
-              Divider(color: Colors.grey[400]),
-              SizedBox(height: 15),
-              Center(
-                child: Text(
-                  "${kMonthNames[month - 1]}, $year",
-                  style: TextStyle(
-                    fontSize: 22,
-                    color: Colors.white,
-                  ),
+        return Column(
+          children: <Widget>[
+            Divider(color: Colors.grey[400]),
+            SizedBox(height: 15),
+            Center(
+              child: Text(
+                "${kMonthNames[month - 1]}" + (startYear - year == 1 ? "" : ", $year"),
+                style: TextStyle(
+                  fontSize: 22,
+                  color: Colors.white,
                 ),
               ),
-              SizedBox(height: 15),
-              Flexible(
-                child: CalendarBody(
-                  monthCalendar: _getCalendarForMonth(year, month),
-                ),
+            ),
+            SizedBox(height: 15),
+            Flexible(
+              child: CalendarBody(
+                monthCalendar: _getCalendarForMonth(year, month),
               ),
-            ],
-          ),
+            ),
+          ],
         );
       },
     );
