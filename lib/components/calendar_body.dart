@@ -6,7 +6,7 @@ class CalendarBody extends StatelessWidget {
 
   const CalendarBody({
     Key key,
-    this.monthCalendar,
+    @required this.monthCalendar,
   }) : super(key: key);
 
   @override

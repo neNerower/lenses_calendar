@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'date_handler.dart';
 import 'first_week_day.dart';
 
@@ -41,8 +42,11 @@ class CalendarModel {
   }
 
   // Get calendar by month
-  List<DateHandler> getMonthCalendar(
-      {int year, int month, FirstWeekDay firstWeekDay = FirstWeekDay.monday}) {
+  List<DateHandler> getMonthCalendar({
+    @required int year,
+    @required int month,
+    FirstWeekDay firstWeekDay = FirstWeekDay.monday,
+  }) {
     // Check passing arguments
     if (year == null || month == null || month < 1 || month > 12)
       throw ArgumentError('Invalid year or month');

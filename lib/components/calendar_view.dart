@@ -7,7 +7,7 @@ import 'calendar_body.dart';
 
 class CalendarView extends StatelessWidget {
   final ScrollController controller;
-  const CalendarView({Key key, this.controller}) : super(key: key);
+  const CalendarView({Key key, @required this.controller}) : super(key: key);
 
   List<DateHandler> _getCalendarForMonth(int year, int month) {
     return CalendarModel().getMonthCalendar(year: year, month: month);
