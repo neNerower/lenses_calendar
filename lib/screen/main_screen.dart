@@ -12,6 +12,7 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   DateTime _currentDate;
+  DateTime _selectedDate;
   ScrollController _controller;
 
   @override
@@ -27,7 +28,11 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   void _goToCurrentMonth() {
-    _controller.jumpTo(kCalendarBodyHeight * (kMonthAmount * 2 - _currentDate.month));
+    _controller.animateTo(
+      kCalendarBodyHeight * (kMonthAmount * 2 - _currentDate.month),
+      duration: Duration(milliseconds: 200),
+      curve: Curves.ease,
+    );
   }
 
   @override
