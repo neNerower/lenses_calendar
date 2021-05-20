@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lenses_calendar/model/date_handler.dart';
 
 import 'day_cell.dart';
-import 'selected_day_wrapper.dart';
+import 'wrappers/selected_day_wrapper.dart';
 
 class CalendarDay extends StatelessWidget {
   final DateHandler date;

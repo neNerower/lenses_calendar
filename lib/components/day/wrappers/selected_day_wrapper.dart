@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'day_cell.dart';
+import '../day_cell.dart';
 
 class SelectedDayWrapper extends StatelessWidget {
   final DayCell child;
