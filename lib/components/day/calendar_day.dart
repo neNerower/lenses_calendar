@@ -22,7 +22,8 @@ class CalendarDay extends StatelessWidget {
   Widget build(BuildContext context) {
     return SelectedDayWrapper(
       isSelected: selectedDate == date.date,
-      child: currentDate == date.date
+      child: DateTime(currentDate.year, currentDate.month, currentDate.day) ==
+              date.date
           ? DayCell(
               date: date,
               size: 18,
