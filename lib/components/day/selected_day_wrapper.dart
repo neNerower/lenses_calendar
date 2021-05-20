@@ -14,16 +14,15 @@ class SelectedDayWrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return isSelected
-        ? Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              color: Colors.green[200],
-            ),
-            child: child,
-          )
-        : Container(
-            child: child,
-          );
+    return Container(
+      height: 40,
+      width: 40,
+      decoration: BoxDecoration(
+        // borderRadius: BorderRadius.circular(20),
+        color: isSelected ? Colors.green[200] : Colors.transparent,
+        shape: BoxShape.circle,
+      ),
+      child: Center(child: child),
+    );
   }
 }
