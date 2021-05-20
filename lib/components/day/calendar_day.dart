@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lenses_calendar/model/date_handler.dart';
 
-import 'current_day_cell.dart';
 import 'day_cell.dart';
 import 'selected_day_wrapper.dart';
 
@@ -24,9 +23,11 @@ class CalendarDay extends StatelessWidget {
     return SelectedDayWrapper(
       isSelected: selectedDate == date.date,
       child: currentDate == date.date
-          ? CurrentDayCell(
+          ? DayCell(
               date: date,
-              onTap: onTap,
+              size: 18,
+              fontWeight: FontWeight.bold,
+              onTapDaySelection: onTap,
             )
           : DayCell(
               date: date,
