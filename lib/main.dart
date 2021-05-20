@@ -6,8 +6,8 @@ void main() {
   runApp(MyApp());
 }
 
-// TODO: ADD DATE SELECTING
 // TODO: ADD LENSES CICLE VIEWING
+// TODO: MAKE DAY SELECTING FASTER
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
