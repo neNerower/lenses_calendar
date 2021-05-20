@@ -7,7 +7,17 @@ import 'calendar_body.dart';
 
 class CalendarView extends StatelessWidget {
   final ScrollController controller;
-  const CalendarView({Key key, @required this.controller}) : super(key: key);
+  final DateTime currentDate;
+  final DateTime selectedDate;
+  final Function onDayTap;
+
+  const CalendarView({
+    Key key,
+    @required this.controller,
+    this.currentDate,
+    this.selectedDate,
+    this.onDayTap,
+  }) : super(key: key);
 
   List<DateHandler> _getCalendarForMonth(int year, int month) {
     return CalendarModel().getMonthCalendar(year: year, month: month);
@@ -31,7 +41,8 @@ class CalendarView extends StatelessWidget {
             SizedBox(height: 15),
             Center(
               child: Text(
-                "${kMonthNames[month - 1]}" + (startYear - year == 1 ? "" : ", $year"),
+                "${kMonthNames[month - 1]}" +
+                    (startYear - year == 1 ? "" : ", $year"),
                 style: TextStyle(
                   fontSize: 22,
                   color: Colors.white,
@@ -42,6 +53,9 @@ class CalendarView extends StatelessWidget {
             Flexible(
               child: CalendarBody(
                 monthCalendar: _getCalendarForMonth(year, month),
+                currentDate: currentDate,
+                selectedDate: selectedDate,
+                onDayTap: onDayTap,
               ),
             ),
           ],

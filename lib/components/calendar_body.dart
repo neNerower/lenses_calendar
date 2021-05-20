@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:lenses_calendar/model/date_handler.dart';
 
-import 'day/day_cell.dart';
+import 'day/calendar_day.dart';
 
 class CalendarBody extends StatelessWidget {
   final List<DateHandler> monthCalendar;
+  final DateTime currentDate;
+  final DateTime selectedDate;
+  final Function onDayTap;
 
   const CalendarBody({
     Key key,
     @required this.monthCalendar,
+    this.currentDate,
+    this.selectedDate,
+    this.onDayTap,
   }) : super(key: key);
 
   @override
@@ -23,8 +29,11 @@ class CalendarBody extends StatelessWidget {
       ),
       itemBuilder: (context, index) {
         return Center(
-          child: DayCell(
+          child: CalendarDay(
             date: monthCalendar[index],
+            selectedDate: selectedDate,
+            currentDate: currentDate,
+            onTap: onDayTap,
           ),
         );
       },

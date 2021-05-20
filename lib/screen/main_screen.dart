@@ -35,6 +35,12 @@ class _MainScreenState extends State<MainScreen> {
     );
   }
 
+  void _selectDate(DateTime date) {
+    setState(() {
+      _selectedDate = date;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,7 +69,12 @@ class _MainScreenState extends State<MainScreen> {
         decoration: BoxDecoration(
           color: Colors.black87,
         ),
-        child: CalendarView(controller: _controller),
+        child: CalendarView(
+          controller: _controller,
+          currentDate: _currentDate,
+          selectedDate: _selectedDate,
+          onDayTap: _selectDate,
+        ),
       ),
     );
   }
