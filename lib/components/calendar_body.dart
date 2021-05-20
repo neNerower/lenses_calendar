@@ -28,14 +28,16 @@ class CalendarBody extends StatelessWidget {
         crossAxisSpacing: 1,
       ),
       itemBuilder: (context, index) {
-        return Center(
-          child: CalendarDay(
-            date: monthCalendar[index],
-            selectedDate: selectedDate,
-            currentDate: currentDate,
-            onTap: onDayTap,
-          ),
-        );
+        return monthCalendar[index].isOtherMonth
+            ? Center()
+            : Center(
+                child: CalendarDay(
+                  date: monthCalendar[index],
+                  selectedDate: selectedDate,
+                  currentDate: currentDate,
+                  onTap: onDayTap,
+                ),
+              );
       },
     );
   }

@@ -27,7 +27,7 @@ class DayCell extends StatelessWidget {
       child: Text(
         '${date.date.day}',
         style: TextStyle(
-          color: (date.isOtherMonth) ? Colors.transparent : color,
+          color: color,
           fontSize: size,
           fontWeight: fontWeight,
         ),
