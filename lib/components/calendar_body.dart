@@ -5,15 +5,11 @@ import 'day/calendar_day.dart';
 
 class CalendarBody extends StatelessWidget {
   final List<DateHandler> monthCalendar;
-  final DateTime currentDate;
-  final DateTime selectedDate;
   final Function onDayTap;
 
   const CalendarBody({
     Key key,
     @required this.monthCalendar,
-    this.currentDate,
-    this.selectedDate,
     this.onDayTap,
   }) : super(key: key);
 
@@ -33,8 +29,6 @@ class CalendarBody extends StatelessWidget {
             : Center(
                 child: CalendarDay(
                   dateHandler: monthCalendar[index],
-                  selectedDate: selectedDate,
-                  currentDate: currentDate,
                   onTap: onDayTap,
                 ),
               );

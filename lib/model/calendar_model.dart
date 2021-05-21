@@ -5,6 +5,16 @@ import 'date_handler.dart';
 import 'first_week_day.dart';
 
 class CalendarModel {
+  final DateTime currentDate;
+  final DateTime selectedDate;
+  final FirstWeekDay firstWeekDay;
+
+  CalendarModel({
+    @required this.currentDate,
+    @required this.selectedDate,
+    this.firstWeekDay = FirstWeekDay.monday,
+  });
+
   // Check for leap year
   bool _isLeapYear(int year) {
     if (year % 4 == 0) {
@@ -26,11 +36,22 @@ class CalendarModel {
     return daysAmount;
   }
 
+  DateHandler _getDateHandler(
+      {int year, int month, int day, bool isOtherMonth = false}) {
+    DateTime date = DateTime(year, month, day);
+
+    return DateHandler(
+      date: date,
+      isOtherMonth: isOtherMonth,
+      isCurrent: currentDate == date,
+      isSelected: selectedDate == date,
+    );
+  }
+
   // Get calendar by month
   List<DateHandler> getMonthCalendar({
     @required int year,
     @required int month,
-    FirstWeekDay firstWeekDay = FirstWeekDay.monday,
   }) {
     // Check passing arguments
     if (year == null || month == null || month < 1 || month > 12)
@@ -43,9 +64,9 @@ class CalendarModel {
 
     // Fill calendar month with dates
     for (int i = 0; i < daysAmount; i++) {
-      calendar.add(DateHandler(
-        date: DateTime(year, month, i + 1),
-      ));
+      calendar.add(
+        _getDateHandler(year: year, month: month, day: i + 1),
+      );
     }
 
     int otherYear;
@@ -77,8 +98,10 @@ class CalendarModel {
         // Add days to start of month calendar to save sequence
         calendar.insert(
           0,
-          DateHandler(
-            date: DateTime(otherYear, otherMonth, i),
+          _getDateHandler(
+            year: year,
+            month: month,
+            day: i,
             isOtherMonth: true,
           ),
         );
@@ -108,8 +131,10 @@ class CalendarModel {
 
       for (int i = 0; i < leftDays; i++) {
         calendar.add(
-          DateHandler(
-            date: DateTime(otherYear, otherMonth, i + 1),
+          _getDateHandler(
+            year: year,
+            month: month,
+            day: i + 1,
             isOtherMonth: true,
           ),
         );

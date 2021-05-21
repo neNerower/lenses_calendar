@@ -7,26 +7,21 @@ import 'wrappers/selected_day_wrapper.dart';
 
 class CalendarDay extends StatelessWidget {
   final DateHandler dateHandler;
-  final DateTime currentDate;
-  final DateTime selectedDate;
   final Function onTap;
 
   const CalendarDay({
     Key key,
     @required this.dateHandler,
-    this.currentDate,
-    this.selectedDate,
     this.onTap,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SelectedDayWrapper(
-      isSelected: selectedDate == dateHandler.date,
+      isSelected: dateHandler.isSelected,
       child: PeriodDayWrapper(
         color: Colors.red,
-        child: DateTime(currentDate.year, currentDate.month, currentDate.day) ==
-                dateHandler.date
+        child: dateHandler.isCurrent
             ? DayCell(
                 date: dateHandler.date,
                 size: 18,

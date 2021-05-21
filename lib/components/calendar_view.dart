@@ -20,7 +20,11 @@ class CalendarView extends StatelessWidget {
   }) : super(key: key);
 
   List<DateHandler> _getCalendarForMonth(int year, int month) {
-    return CalendarModel().getMonthCalendar(year: year, month: month);
+    CalendarModel calendarModel = CalendarModel(
+      currentDate: currentDate,
+      selectedDate: selectedDate,
+    );
+    return calendarModel.getMonthCalendar(year: year, month: month);
   }
 
   @override
@@ -53,8 +57,6 @@ class CalendarView extends StatelessWidget {
             Flexible(
               child: CalendarBody(
                 monthCalendar: _getCalendarForMonth(year, month),
-                currentDate: currentDate,
-                selectedDate: selectedDate,
                 onDayTap: onDayTap,
               ),
             ),

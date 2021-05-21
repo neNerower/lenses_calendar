@@ -19,7 +19,7 @@ class _MainScreenState extends State<MainScreen> {
   void initState() {
     super.initState();
     DateTime now = DateTime.now();
-    _currentDate = now;
+    _currentDate = DateTime(now.year, now.month, now.day);
 
     _controller = ScrollController(
       initialScrollOffset: kCalendarBodyHeight * (kMonthAmount * 2 - now.month),
