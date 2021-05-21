@@ -6,14 +6,14 @@ import 'wrappers/period_day_wrapper.dart';
 import 'wrappers/selected_day_wrapper.dart';
 
 class CalendarDay extends StatelessWidget {
-  final DateHandler date;
+  final DateHandler dateHandler;
   final DateTime currentDate;
   final DateTime selectedDate;
   final Function onTap;
 
   const CalendarDay({
     Key key,
-    @required this.date,
+    @required this.dateHandler,
     this.currentDate,
     this.selectedDate,
     this.onTap,
@@ -22,19 +22,19 @@ class CalendarDay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SelectedDayWrapper(
-      isSelected: selectedDate == date.date,
+      isSelected: selectedDate == dateHandler.date,
       child: PeriodDayWrapper(
         color: Colors.red,
         child: DateTime(currentDate.year, currentDate.month, currentDate.day) ==
-                date.date
+                dateHandler.date
             ? DayCell(
-                date: date,
+                date: dateHandler.date,
                 size: 18,
                 fontWeight: FontWeight.bold,
                 onTapDaySelection: onTap,
               )
             : DayCell(
-                date: date,
+                date: dateHandler.date,
                 onTapDaySelection: onTap,
               ),
       ),

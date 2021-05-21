@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lenses_calendar/model/date_handler.dart';
 
 class DayCell extends StatelessWidget {
-  final DateHandler date;
+  final DateTime date;
   final Color color;
   final double size;
   final FontWeight fontWeight;
@@ -18,14 +18,14 @@ class DayCell extends StatelessWidget {
   }) : super(key: key);
 
   void _selectDay() {
-    onTapDaySelection(date.date);
+    onTapDaySelection(date);
   }
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       child: Text(
-        '${date.date.day}',
+        '${date.day}',
         style: TextStyle(
           color: color,
           fontSize: size,

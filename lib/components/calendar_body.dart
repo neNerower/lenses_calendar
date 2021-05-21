@@ -32,7 +32,7 @@ class CalendarBody extends StatelessWidget {
             ? Center()
             : Center(
                 child: CalendarDay(
-                  date: monthCalendar[index],
+                  dateHandler: monthCalendar[index],
                   selectedDate: selectedDate,
                   currentDate: currentDate,
                   onTap: onDayTap,
