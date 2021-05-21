@@ -1,25 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:lenses_calendar/constants/constants.dart';
+
 import 'date_handler.dart';
 import 'first_week_day.dart';
 
 class CalendarModel {
-  // Amount of days in months
-  // [JAN, FEB, MAR, APR, MAY, JUN, JUL, AUG, SEP, OCT, NOV, DEC]
-  final List<int> _monthLengths = [
-    31,
-    28,
-    31,
-    30,
-    31,
-    30,
-    31,
-    31,
-    30,
-    31,
-    30,
-    31
-  ];
-
   // Check for leap year
   bool _isLeapYear(int year) {
     if (year % 4 == 0) {
@@ -34,7 +19,7 @@ class CalendarModel {
 
   // Get amount of days in processed month
   int _getDaysAmount(int year, int month) {
-    int daysAmount = _monthLengths[month - 1];
+    int daysAmount = monthLengths[month - 1];
     // If this is a leap year and month is february
     if (_isLeapYear(year) && month == DateTime.february) daysAmount++;
 
