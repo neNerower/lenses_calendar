@@ -5,26 +5,42 @@ import 'package:lenses_calendar/model/date_handler.dart';
 
 import 'calendar_body.dart';
 
-class CalendarView extends StatelessWidget {
+class CalendarView extends StatefulWidget {
   final ScrollController controller;
-  final DateTime currentDate;
-  final DateTime selectedDate;
-  final Function onDayTap;
 
   const CalendarView({
     Key key,
     @required this.controller,
-    this.currentDate,
-    this.selectedDate,
-    this.onDayTap,
   }) : super(key: key);
+
+  @override
+  _CalendarViewState createState() => _CalendarViewState();
+}
+
+class _CalendarViewState extends State<CalendarView> {
+  DateTime _currentDate;
+  DateTime _selectedDate;
+
+  @override
+  void initState() { 
+    super.initState();
+
+    DateTime now = DateTime.now();
+    _currentDate = DateTime(now.year, now.month, now.day);
+  }
 
   List<DateHandler> _getCalendarForMonth(int year, int month) {
     CalendarModel calendarModel = CalendarModel(
-      currentDate: currentDate,
-      selectedDate: selectedDate,
+      currentDate: _currentDate,
+      selectedDate: _selectedDate,
     );
     return calendarModel.getMonthCalendar(year: year, month: month);
+  }
+
+  void _selectDate(DateTime date) {
+    setState(() {
+      _selectedDate = date;
+    });
   }
 
   @override
@@ -32,7 +48,7 @@ class CalendarView extends StatelessWidget {
     int startYear = DateTime.now().year + 1;
 
     return ListView.builder(
-      controller: controller,
+      controller: widget.controller,
       reverse: true,
       itemExtent: kCalendarBodyHeight,
       itemBuilder: (context, index) {
@@ -57,7 +73,7 @@ class CalendarView extends StatelessWidget {
             Flexible(
               child: CalendarBody(
                 monthCalendar: _getCalendarForMonth(year, month),
-                onDayTap: onDayTap,
+                onDayTap: _selectDate,
               ),
             ),
           ],
@@ -66,3 +82,4 @@ class CalendarView extends StatelessWidget {
     );
   }
 }
+
