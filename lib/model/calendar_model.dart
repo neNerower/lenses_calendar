@@ -7,11 +7,13 @@ import 'first_week_day.dart';
 class CalendarModel {
   final DateTime currentDate;
   final DateTime selectedDate;
+  final List<DateTime> changeDates;
   final FirstWeekDay firstWeekDay;
 
   CalendarModel({
     @required this.currentDate,
     @required this.selectedDate,
+    this.changeDates, 
     this.firstWeekDay = FirstWeekDay.monday,
   });
 
@@ -45,6 +47,7 @@ class CalendarModel {
       isOtherMonth: isOtherMonth,
       isCurrent: currentDate == date,
       isSelected: selectedDate == date,
+      isTimeToChange: changeDates.contains(date),
     );
   }
 

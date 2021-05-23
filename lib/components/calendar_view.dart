@@ -20,6 +20,7 @@ class CalendarView extends StatefulWidget {
 class _CalendarViewState extends State<CalendarView> {
   DateTime _currentDate;
   DateTime _selectedDate;
+  List<DateTime> _changeDates;
 
   @override
   void initState() { 
@@ -27,12 +28,18 @@ class _CalendarViewState extends State<CalendarView> {
 
     DateTime now = DateTime.now();
     _currentDate = DateTime(now.year, now.month, now.day);
+
+    // Testing data for debugging
+    _changeDates = [
+      DateTime(now.year, now.month, now.day).subtract(Duration(days: 3)),
+    ];
   }
 
   List<DateHandler> _getCalendarForMonth(int year, int month) {
     CalendarModel calendarModel = CalendarModel(
       currentDate: _currentDate,
       selectedDate: _selectedDate,
+      changeDates: _changeDates,
     );
     return calendarModel.getMonthCalendar(year: year, month: month);
   }

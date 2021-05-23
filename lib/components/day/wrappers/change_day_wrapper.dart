@@ -3,21 +3,24 @@ import 'package:flutter/material.dart';
 
 import '../day_cell.dart';
 
-class PeriodDayWrapper extends StatelessWidget {
+class ChangeDayWrapper extends StatelessWidget {
   final DayCell child;
+  final bool isTimeToChange;
   final Color color;
 
-  const PeriodDayWrapper({
+  const ChangeDayWrapper({
     Key key,
     this.child,
     this.color = Colors.transparent,
+    this.isTimeToChange = false,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return DottedBorder(
-      color: color,
+      color: isTimeToChange ? color : Colors.transparent,
       borderType: BorderType.Circle,
+      dashPattern: [6, 4],
       child: Center(child: child),
     );
   }

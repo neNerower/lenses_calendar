@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lenses_calendar/model/date_handler.dart';
 
 import 'day_cell.dart';
-import 'wrappers/period_day_wrapper.dart';
+import 'wrappers/change_day_wrapper.dart';
 import 'wrappers/selected_day_wrapper.dart';
 
 class CalendarDay extends StatelessWidget {
@@ -19,8 +19,9 @@ class CalendarDay extends StatelessWidget {
   Widget build(BuildContext context) {
     return SelectedDayWrapper(
       isSelected: dateHandler.isSelected,
-      child: PeriodDayWrapper(
+      child: ChangeDayWrapper(
         color: Colors.red,
+        isTimeToChange: dateHandler.isTimeToChange,
         child: dateHandler.isCurrent
             ? DayCell(
                 date: dateHandler.date,
