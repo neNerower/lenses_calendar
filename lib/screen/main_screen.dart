@@ -18,7 +18,7 @@ class _MainScreenState extends State<MainScreen> {
   @override
   void initState() {
     super.initState();
-    DateTime _now = DateTime.now();
+    _now = DateTime.now();
 
     _controller = ScrollController(
       initialScrollOffset:
