@@ -66,6 +66,22 @@ class _MainScreenState extends State<MainScreen> {
           controller: _controller,
         ),
       ),
+      floatingActionButton: Container(
+        height: 35,
+        width: 110,
+        child: FloatingActionButton.extended(
+          label: Text(
+            "Choose date",
+            style: TextStyle(
+              fontSize: 12,
+            ),
+          ),
+          elevation: 10,
+          backgroundColor: Colors.amber,
+          onPressed: () {},
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
