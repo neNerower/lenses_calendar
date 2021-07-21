@@ -13,6 +13,7 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   DateTime _now;
   ScrollController _controller;
+  bool _isChoosingMode;
 
   @override
   void initState() {
@@ -64,6 +65,7 @@ class _MainScreenState extends State<MainScreen> {
         ),
         child: CalendarView(
           controller: _controller,
+          isChoosingMode: _isChoosingMode,
         ),
       ),
       floatingActionButton: Container(

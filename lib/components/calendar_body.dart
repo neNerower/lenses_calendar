@@ -6,11 +6,13 @@ import 'day/calendar_day.dart';
 class CalendarBody extends StatelessWidget {
   final List<DateHandler> monthCalendar;
   final Function onDayTap;
+  final bool isChoosingMode;
 
   const CalendarBody({
     Key key,
     @required this.monthCalendar,
     this.onDayTap,
+    this.isChoosingMode,
   }) : super(key: key);
 
   @override
@@ -27,9 +29,14 @@ class CalendarBody extends StatelessWidget {
         return monthCalendar[index].isOtherMonth
             ? Center()
             : Center(
-                child: CalendarDay(
-                  dateHandler: monthCalendar[index],
-                  onTap: onDayTap,
+                child: Column(
+                  children: [
+                    CalendarDay(
+                      dateHandler: monthCalendar[index],
+                      onTap: onDayTap,
+                    ),
+                    Checkbox(),
+                  ],
                 ),
               );
       },

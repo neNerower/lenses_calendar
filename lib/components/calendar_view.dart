@@ -7,10 +7,12 @@ import 'calendar_body.dart';
 
 class CalendarView extends StatefulWidget {
   final ScrollController controller;
+  final bool isChoosingMode;
 
   const CalendarView({
     Key key,
     @required this.controller,
+    this.isChoosingMode,
   }) : super(key: key);
 
   @override
@@ -23,7 +25,7 @@ class _CalendarViewState extends State<CalendarView> {
   List<DateTime> _changeDates;
 
   @override
-  void initState() { 
+  void initState() {
     super.initState();
 
     DateTime now = DateTime.now();
@@ -80,6 +82,7 @@ class _CalendarViewState extends State<CalendarView> {
             Flexible(
               child: CalendarBody(
                 monthCalendar: _getCalendarForMonth(year, month),
+                isChoosingMode: widget.isChoosingMode,
                 onDayTap: _selectDate,
               ),
             ),
@@ -89,4 +92,3 @@ class _CalendarViewState extends State<CalendarView> {
     );
   }
 }
-
